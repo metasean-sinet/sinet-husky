@@ -1,3 +1,3 @@
-var sonarLint = require('./sonarLint.js')
+var sonarLint = require('./verifiers/sonarLint.js')
 
 sonarLint.selfInvocation()
