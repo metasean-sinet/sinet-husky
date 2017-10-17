@@ -52,6 +52,7 @@ function wasInvocatedBy () {
   // return if it was not explicitly called with this script's filename
   const calledWith = process.argv[1]
   const scriptFileName = path.basename(__filename)
+  let result = false
   
   // not directly invoked
   if (calledWith.indexOf(scriptFileName) === -1) return
@@ -65,15 +66,14 @@ function wasInvocatedBy () {
     const evaluationDir = process.argv[3]
     // if there were additional parameters, then *_ASSUME_* 
     // it was called with reportFile & evaluation directory parameters
-    const result = evaluateLogReport(reportFile, evaluationDir)
-    return (result === true ? process.exit(PASS) : process.exit(FAIL) )
+    result = evaluateLogReport(reportFile, evaluationDir)
   }
   else {
     // if not, this script is in charge of determining them
-    const result = selfInvocation()
+    result = selfInvocation()
     console.log(result)
-    return (result === true ? process.exit(PASS) : process.exit(FAIL) )
   }
+  return (result === true ? process.exit(PASS) : process.exit(FAIL) )
 }
 
 function selfInvocation () {
