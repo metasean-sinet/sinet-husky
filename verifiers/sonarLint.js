@@ -56,9 +56,11 @@ function wasInvocatedBy () {
   
   // not directly invoked
   if (calledWith.indexOf(scriptFileName) === -1) return
-  
+  console.log('process.argv.length', process.argv.length)
   // determine if there are two additional parameters
   if (process.argv.length === 4) {
+    
+    console.log('\n\n\n-----evaluateLogReport STARTING-----', result)
     // if so, use them to evaluate the existing log report
     // set reportFile name
     const reportFile = process.argv[2]
@@ -70,10 +72,11 @@ function wasInvocatedBy () {
   }
   else {
     // if not, this script is in charge of determining them
+    console.log('\n\n\n-----selfInvocation CALLED-----', result)
     result = selfInvocation()
-    console.log(result)
+    console.log('\n\n\n-----selfInvocation RESULT HERE-----', result)
   }
-  console.log('result', result)
+  console.log('\n\n\n-----RESULTS HERE-----\n\n\n', result)
   return (result === true ? process.exit(PASS) : process.exit(FAIL) )
 }
 
