@@ -148,7 +148,7 @@ function fail(report) {
   return false
 }
 
-wasInvocatedBy()
+console.log('wasInvocatedBy()', wasInvocatedBy())
 
 // export to allow testing of what can be tested
 module.exports = { verify, selfInvocation }
