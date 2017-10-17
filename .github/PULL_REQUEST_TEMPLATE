@@ -1,0 +1,49 @@
+
+Each checkbox below should be marked as completed (i.e. `[x]`) or not applicable (`[n/a]`).
+
+## The Pull Request:  
+- [ ] title contains ticket/issue id  
+- [ ] description contains an explanation of changes  
+- [ ] passes all tests  
+- [ ] passes all static code analysis (e.g. SonarQube) 
+
+## Supporting Confluence documentation updated to include:  
+- [ ] brief description & purpose of service/application component  
+- [ ] architectural diagram  
+- [ ] quick links to source code, endpoints/containers, build process, & any enabled monitoring/logging  
+- [ ] guidance related to (a) Stability & Reliability, (b) Scalability & Performance, (c) Fault Tolerance & Catastrophe Preparedness, (d) Security Concerns/Highlights, & (e) Monitoring
+
+## The GitHub README.md includes:  
+- [ ] Core info & guidance updated regarding proper use, structure of the component, & any additional relevant guidance.
+
+For PRD related changes:
+ - [ ] product management & dev teams involved the security team if the proposed changes may:
+   - lead to or contain potential security implications  
+     _OR_
+   - impact the security of the application
+   
+## Actual code  
+- [ ] all input is validated (whitelisted if possible) and properly sanitized  
+      "Input is evil! Don't trust it.  
+      https://frontlinetechnologies.atlassian.net/wiki/spaces/SEC/pages/148160588/Secure+Developer+Training  
+- [ ] runs with the least privileges required for functionality  
+      "Restrict privileges"  
+- [ ] sensitive data or personally identifiable information (PII) is properly handled, logged, cached, etc, specifically  
+      - it is secured
+      - if possible, it is encrypted  
+      https://frontlinetechnologies.atlassian.net/wiki/display/SEC/Sensitive+Data+Definitions  
+- [ ] code is easy to read & follow  
+- [ ] business logic makes sense  
+- [ ] automated find has been done to remove common string patterns such as "key," "secret," "password," "pwd," and "connectionstring"
+
+### JavaScript/Nodejs code  
+- [ ] external dependencies added  
+- [ ] external dependencies have been scanned for Open Source Security vulnerabilities (e.g., OWASP Dependency Check within SonarQube)  
+- [ ] `eval`, `setInterval`, `setTimout`, `new Function()` are _not_ used  
+      eval is evil, so don't use it directly or indirectly  
+- [ ] everything passed from the server to the browser is ok for the end user to see  
+      "Javascript executing in the browser is executing in an untrusted environment."  
+- [ ] JavaScript sent back to the server is scrubbed before execution  
+- [ ] possible errors handled to avoid leaking sensitive details about underlying infrastructure
+
+Based on: https://frontlinetechnologies.atlassian.net/wiki/spaces/SEC/pages/148287227/Secure+Code+Review+Practices

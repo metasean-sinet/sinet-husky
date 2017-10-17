@@ -8,12 +8,15 @@ This is a repo for any git hook related scripts that uses [Husky](https://github
 1. Ensure [SonarLint for Command Line](http://www.sonarlint.org/commandline/) is installed and running.
 
 ### Repository Set-up
-1. npm/yarn install this project as a `"dependency"`.
-2. In the main repo's package.json `"scripts"` section add:
+1. npm/yarn install this project as a `"dependency"`, e.g.:  
+   `npm install @sinet/sinet-husky --save`
+2. npm/yarn install the "husky" module as a `"dependency"`, e.g.:  
+   `npm install husky --save`
+3. In the main repo's package.json `"scripts"` section add:
   ```
   "precommit": "node ./node_modules/sinet-husky/index.js"
   ```
-3. In the main repo's `.gitignore` file, ensure there are the following two entries:
+4. In the main repo's `.gitignore` file, ensure there are the following two entries:
   ```
   .sonarlint/*
   logs
