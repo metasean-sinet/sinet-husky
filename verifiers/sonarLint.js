@@ -73,6 +73,7 @@ function wasInvocatedBy () {
     result = selfInvocation()
     console.log(result)
   }
+  console.log('result', result)
   return (result === true ? process.exit(PASS) : process.exit(FAIL) )
 }
 
