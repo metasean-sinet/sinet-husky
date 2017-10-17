@@ -47,17 +47,14 @@ const foregroundWhite = '\x1b[37m'
 const defaultFailOnArr = ['major', 'critical']
 
 // determine, and act based on, what parameters were, or were not, passed
-function wasInvocatedBy () {
+function main () {
   // determine if the node file explicitely called to run is this script file
   // return if it was not explicitly called with this script's filename
   const calledWith = process.argv[1]
   const scriptFileName = path.basename(__filename)
   let result = false
-  
-  // not directly invoked
-  if (calledWith.indexOf(scriptFileName) === -1) return
-  console.log('process.argv.length', process.argv.length)
-  // determine if there are two additional parameters
+
+  // determine if there are two parameters were passed into the node call
   if (process.argv.length === 4) {
     
     console.log('\n\n\n-----evaluateLogReport STARTING-----', result)
@@ -72,11 +69,8 @@ function wasInvocatedBy () {
   }
   else {
     // if not, this script is in charge of determining them
-    console.log('\n\n\n-----selfInvocation CALLED-----', result)
     result = selfInvocation()
-    console.log('\n\n\n-----selfInvocation RESULT HERE-----', result)
   }
-  console.log('\n\n\n-----RESULTS HERE-----\n\n\n', result)
   return (result === true ? process.exit(PASS) : process.exit(FAIL) )
 }
 
@@ -147,14 +141,12 @@ function fail(report) {
   // construct really obvious SonarLint fail message
   const border = '\n‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️‼️\n'
   const padding = '‼️                                    ‼️'
-  const txt = '\n‼️    FAILED SonarLint verification   ‼️\n'
+  const txt = '\n‼️   FAILED SonarLint verification  ‼️\n'
   console.log(foregroundRed, border + padding + txt + padding + border)
   console.log(foregroundWhite, '\n' + report)
   // return trigger to halt bash script
   return false
 }
 
-console.log('wasInvocatedBy()', wasInvocatedBy())
-
 // export to allow testing of what can be tested
-module.exports = { verify, selfInvocation }
+module.exports = { verify, selfInvocation, main }
