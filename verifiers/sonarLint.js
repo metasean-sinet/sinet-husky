@@ -70,17 +70,18 @@ function wasInvocatedBy () {
   }
   else {
     // if not, this script is in charge of determining them
-    selfInvocation()
+    const result = selfInvocation()
+    console.log(result)
+    return (result === true ? process.exit(PASS) : process.exit(FAIL) )
   }
 }
 
 function selfInvocation () {
   const logFile = mkLogFile()
   const evaluationDirs = ['test/**', 'src/**']
-  return evaluationDirs.forEach( dir => {
+  return evaluationDirs.every( dir => {
     runSonarLint(logFile, dir)
-    const result = evaluateLogReport(logFile, dir)
-    return (result === true ? process.exit(PASS) : process.exit(FAIL) )
+    return evaluateLogReport(logFile, dir)
   })
 }
 
