@@ -77,9 +77,10 @@ function wasInvocatedBy () {
 function selfInvocation () {
   const logFile = mkLogFile()
   const evaluationDirs = ['test/**', 'src/**']
-  evaluationDirs.forEach( dir => {
+  return evaluationDirs.forEach( dir => {
     runSonarLint(logFile, dir)
-    evaluateLogReport(logFile, dir)
+    const result = evaluateLogReport(logFile, dir)
+    return (result === true ? process.exit(PASS) : process.exit(FAIL) )
   })
 }
 
