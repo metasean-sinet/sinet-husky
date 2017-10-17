@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "eslint": "^4.8.0",
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
