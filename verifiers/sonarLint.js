@@ -99,7 +99,6 @@ function runSonarLint (logFile, evaluationDir) {
 }
 
 function evaluateLogReport (reportFile, evaluationDir) {
-  console.log('running evaluateLogReport')
   // save the report text contents to reportData
   const reportData = fs.readFileSync(reportFile, 'utf8')
   // delete the report's sonarlintlog file
