@@ -89,6 +89,11 @@ function main (argv) {
   
 function selfInvocation (lintConfigs = defaultLintConfigs) {
   const logFile = mkLogFile()
+  // TECH DEBT?
+  // if a str is passed in, convert it to an array
+  if (!Array.isArray(lintConfigs)) {
+    lintConfigs = [lintConfigs]
+  }
   return lintConfigs.every( args => {
     runSonarLint({logFile, commandLineArgs:args})
     return evaluateLogReport(logFile, args)
