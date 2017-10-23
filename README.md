@@ -12,10 +12,15 @@ This is a repo for any git hook related scripts that uses [Husky](https://github
    `npm install @sinet/sinet-husky --save`
 2. npm/yarn install the "husky" module as a `"dependency"`, e.g.:  
    `npm install husky --save`
-3. In the main repo's package.json `"scripts"` section add:
-  ```
-  "precommit": "node ./node_modules/sinet-husky/index.js"
-  ```
+3. In the main repo's package.json `"scripts"` section add a precommit command:
+    - to use the default SonarLint flags, add
+      ```
+      "precommit": "node ./node_modules/sinet-husky/index.js"
+      ```
+    - to pass in an alternate SonarLint flag(s), add a precommit with the desired SonarLint flag(s) in single quotes and any embedded double-quotes escaped:
+      ```
+      "precommit": "node ./node_modules/sinet-husky/index.js '--exclude \"{*-disregard,node_modules}/**\"  --tests \"{test/**,**.test.js}\"'"
+      ```
 4. In the main repo's `.gitignore` file, ensure there are the following two entries:
   ```
   .sonarlint/*
